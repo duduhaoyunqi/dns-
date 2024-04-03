@@ -2,3 +2,4 @@ dns是通过tcp53或udp53协议去连的，如果从实例ping通dns服务器是
 
 可以用vpc里面默认的dns服务器去测试， Amazon 提供的 DNS 服务器（CIDR+2），
 例如，如果您的 VPC 的主要 CIDR 范围为 172.31.0.0/16，则 VPC DNS 服务器的 IP 地址为 172.31.0.2。这是 VPC 网络范围加上2。
+当在vpc内部创建endpoint 会在这里更新记录。

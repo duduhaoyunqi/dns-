@@ -1,5 +1,29 @@
 dns是通过tcp53或udp53协议去连的，如果从实例ping通dns服务器是没有意义的，因为ping是icmp协议
+确保从实例连到dns服务器的tcp53或udp53端口是通的。
 
 可以用vpc里面默认的dns服务器去测试， Amazon 提供的 DNS 服务器（CIDR+2），
 例如，如果您的 VPC 的主要 CIDR 范围为 172.31.0.0/16，则 VPC DNS 服务器的 IP 地址为 172.31.0.2。这是 VPC 网络范围加上2。
 当在vpc内部创建endpoint 会在这里更新记录。
+所在子网网段是10.133.131.0/24，Amazon 提供的 DNS 服务器10.133.131.2
+
+#nslookup查看到正在使用的dns服务器
+C:\Users\Administrator>nslookup
+Default Server:  UnKnown
+Address:  10.133.13.224
+>
+
+#server命令 修改dns服务器
+> server 8.8.8.8
+Default Server:  dns.google
+Address:  8.8.8.8
+
+要看10.133.13.224这台dns服务器里面的dns记录是怎么去更新monitoring.ap-southeast-1.amazonaws.com这个域名。会去问外面的amazonaws.com的dns server拿到的public ip
+10.133.13.224这台dns服务器只会和外面的dns服务器去做查询。 如果要和vpc的dns服务器去做查询就可以查询到private ip
+现在去查monitoring.ap-southeast-1.amazonaws.com去和域控查一定查不到，因为monitoring.ap-southeast-1.amazonaws.com它不是amazonaws.com的domain，
+
+如果想要访问monitoring.ap-southeast-1.amazonaws.com这个域名，就会向dns服务器问：请问这个域名的ip是什么，它如果没有这个记录，那它一定要回上一层问ap-southeast-1.amazonaws.com，
+如果ap-southeast-1.amazonaws.com没有这个记录就要到上一层amazonaws.com这个Name Server去问，
+amazonaws.com说噢monitoring.ap-southeast-1.amazonaws.com的ip是15.221.10.2回复到域控10.133.13.224。
+然后域控就告诉你ip是15.221.10.2
+
+

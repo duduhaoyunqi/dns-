@@ -1,0 +1,1 @@
+dns是通过tcp53或udp53协议去连的，如果从实例ping通dns服务器是没有意义的，因为ping是icmp协议

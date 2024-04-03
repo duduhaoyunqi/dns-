@@ -30,4 +30,6 @@ amazonaws.com说噢monitoring.ap-southeast-1.amazonaws.com的ip是15.221.10.2回
 而vpc的默认的dns服务当创建了vpc endpoint等就会更新dns记录，所以你问vpc的默认的dns服务器时，他会知道对应的private ip，
 但是你自己创建的域控的dns服务它不知道。
 
+要连进去域控去做forward查询，要配置往vpc默认dns去问
+
 

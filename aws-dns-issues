@@ -26,4 +26,8 @@ Address:  8.8.8.8
 amazonaws.com说噢monitoring.ap-southeast-1.amazonaws.com的ip是15.221.10.2回复到域控10.133.13.224。
 然后域控就告诉你ip是15.221.10.2
 
+自己创建域控的dns服务，当你问域控时，它不知道，他就会往外面问。
+而vpc的默认的dns服务当创建了vpc endpoint等就会更新dns记录，所以你问vpc的默认的dns服务器时，他会知道对应的private ip，
+但是你自己创建的域控的dns服务它不知道。
+
 
